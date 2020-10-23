@@ -1,0 +1,8 @@
+<h1>TO DO LIST</h1>
+<ul>
+
+<ul>
+  <% @diary_entries.select do |k, v| %>
+    <li><%= "#{k}: #{v}" %></li>
+  <% end %>
+</ul>
