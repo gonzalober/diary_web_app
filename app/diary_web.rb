@@ -8,16 +8,16 @@ class DailyDiary < Sinatra::Base
   end
 
   get '/todolist' do
-    # if @diary_unlock == true
     @diary_entries = DailyDiaryList.new.get_entries
-    # else
-    #   print "Diary is locked"
-    # end
     erb :'diarylist/todolist'
   end
 
-  post '/todolist' do
+  get '/todolist/new' do
+    erb :'diarylist/form'
+  end
 
+  post '/todolist' do
+    DailyDiaryList.new.add_entry(params[:date], params[:action], params[:item_or_message])
     redirect '/todolist'
   end
   

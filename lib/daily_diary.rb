@@ -19,20 +19,14 @@ class DailyDiaryList
   end
 
   def add_entry(date, action, item)
-    if @diary_unlock == false 
-      'Diary is locked'
-    else
       @connection = PG.connect(dbname: 'daily_dairy')
       @connection.exec "INSERT INTO dialy_dairy (date, action, item_or_message) VALUES ('#{date}', '#{action}', '#{item}');"
-    end
   end
 
   def get_entries
-    
       @connection = PG.connect(dbname: 'daily_dairy')
-      result = @connection.exec ("SELECT * FROM dialy_dairy")
+      result = @connection.exec ("SELECT * FROM dialy_dairy ORDER BY date ASC")
       result.map {|list| list}
-    
   end
 
 end
